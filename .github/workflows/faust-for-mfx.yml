@@ -127,7 +127,7 @@ jobs:
         set ( CSHARP_BACKEND                     OFF       CACHE STRING  "Include CSharp backend" FORCE )
         set ( DLANG_BACKEND                      OFF       CACHE STRING  "Include Dlang backend" FORCE )
         set ( FIR_BACKEND                        OFF      CACHE STRING  "Include FIR backend" FORCE )
-        set ( INTERP_BACKEND                     OFF      CACHE STRING  "Include Interpreter backend" FORCE )
+        set ( INTERP_BACKEND COMPILER STATIC DYNAMIC      CACHE STRING  "Include Interpreter backend" FORCE )
         set ( JAVA_BACKEND                       OFF       CACHE STRING  "Include JAVA backend" FORCE )
         set ( JAX_BACKEND                        OFF       CACHE STRING  "Include JAX backend"  FORCE )
         set ( JULIA_BACKEND                      OFF       CACHE STRING  "Include Julia backend" FORCE )
@@ -239,7 +239,7 @@ jobs:
       matrix:
         include:
           - name: x64
-            os: macos-12
+            os: macos-13
             llvm-url: https://github.com/grame-cncm/faust/releases/download/2.59.5-llvm/llvm-15.0.7-macos10.15-x86_64.zip
             ARCHS: "-arch x86_64"
             CMAKE_OSX_ARCHITECTURES: x86_64
