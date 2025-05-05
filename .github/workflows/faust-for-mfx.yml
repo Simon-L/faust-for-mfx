@@ -10,7 +10,7 @@ env:
 # Controls when the action will run.
 on:
   push:
-    branches: [ "mfx-gh-actions" ]
+    branches: [ "main" ]
   # Allows you to run this workflow manually from the Actions tab
   workflow_call:
 
@@ -44,7 +44,31 @@ jobs:
         submodules: true
         repository: grame-cncm/faust
         ref: master-dev
-
+        
+    - shell: bash
+      run: |
+        cat <<EOF > build/backends/mfx.cmake
+        set ( C_BACKEND      COMPILER STATIC DYNAMIC      CACHE STRING  "Include C backend" FORCE )
+        set ( CODEBOX_BACKEND      COMPILER STATIC DYNAMIC      CACHE STRING  "Include Codebox backend" FORCE )
+        set ( CPP_BACKEND    COMPILER STATIC DYNAMIC      CACHE STRING  "Include CPP backend" FORCE )
+        set ( CMAJOR_BACKEND                     OFF  CACHE STRING  "Include Cmajor backend" FORCE )
+        #set ( CMAJOR_BACKEND                     OFF       CACHE STRING  "Include Cmajor backend" FORCE )
+        set ( CSHARP_BACKEND                     OFF       CACHE STRING  "Include CSharp backend" FORCE )
+        set ( DLANG_BACKEND                      OFF       CACHE STRING  "Include Dlang backend" FORCE )
+        set ( FIR_BACKEND                        OFF      CACHE STRING  "Include FIR backend" FORCE )
+        set ( INTERP_BACKEND                     OFF      CACHE STRING  "Include Interpreter backend" FORCE )
+        set ( JAVA_BACKEND                       OFF       CACHE STRING  "Include JAVA backend" FORCE )
+        set ( JAX_BACKEND                        OFF       CACHE STRING  "Include JAX backend"  FORCE )
+        set ( JULIA_BACKEND                      OFF       CACHE STRING  "Include Julia backend" FORCE )
+        set ( JSFX_BACKEND                      OFF       CACHE STRING  "Include JSFX backend" FORCE )
+        set ( LLVM_BACKEND   COMPILER STATIC DYNAMIC      CACHE STRING  "Include LLVM backend" FORCE )
+        set ( OLDCPP_BACKEND COMPILER STATIC DYNAMIC      CACHE STRING  "Include old CPP backend" FORCE )
+        set ( RUST_BACKEND                       OFF      CACHE STRING  "Include Rust backend" FORCE )
+        set ( TEMPLATE_BACKEND                   OFF      CACHE STRING  "Include Template backend" FORCE )
+        set ( VHDL_BACKEND                       OFF      CACHE STRING  "Include VHLD backend" FORCE )
+        set ( WASM_BACKEND                       OFF      CACHE STRING  "Include WASM backend" FORCE )
+        EOF
+        
     - name: Install dependencies
       run: |
         sudo apt-get install -y zstd libncurses-dev libxml2-dev
@@ -89,6 +113,32 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
+        repository: grame-cncm/faust
+        ref: master-dev
+
+    - shell: bash
+      run: |
+        cat <<EOF > build/backends/mfx.cmake
+        set ( C_BACKEND      COMPILER STATIC DYNAMIC      CACHE STRING  "Include C backend" FORCE )
+        set ( CODEBOX_BACKEND      COMPILER STATIC DYNAMIC      CACHE STRING  "Include Codebox backend" FORCE )
+        set ( CPP_BACKEND    COMPILER STATIC DYNAMIC      CACHE STRING  "Include CPP backend" FORCE )
+        set ( CMAJOR_BACKEND                     OFF  CACHE STRING  "Include Cmajor backend" FORCE )
+        #set ( CMAJOR_BACKEND                     OFF       CACHE STRING  "Include Cmajor backend" FORCE )
+        set ( CSHARP_BACKEND                     OFF       CACHE STRING  "Include CSharp backend" FORCE )
+        set ( DLANG_BACKEND                      OFF       CACHE STRING  "Include Dlang backend" FORCE )
+        set ( FIR_BACKEND                        OFF      CACHE STRING  "Include FIR backend" FORCE )
+        set ( INTERP_BACKEND                     OFF      CACHE STRING  "Include Interpreter backend" FORCE )
+        set ( JAVA_BACKEND                       OFF       CACHE STRING  "Include JAVA backend" FORCE )
+        set ( JAX_BACKEND                        OFF       CACHE STRING  "Include JAX backend"  FORCE )
+        set ( JULIA_BACKEND                      OFF       CACHE STRING  "Include Julia backend" FORCE )
+        set ( JSFX_BACKEND                      OFF       CACHE STRING  "Include JSFX backend" FORCE )
+        set ( LLVM_BACKEND   COMPILER STATIC DYNAMIC      CACHE STRING  "Include LLVM backend" FORCE )
+        set ( OLDCPP_BACKEND COMPILER STATIC DYNAMIC      CACHE STRING  "Include old CPP backend" FORCE )
+        set ( RUST_BACKEND                       OFF      CACHE STRING  "Include Rust backend" FORCE )
+        set ( TEMPLATE_BACKEND                   OFF      CACHE STRING  "Include Template backend" FORCE )
+        set ( VHDL_BACKEND                       OFF      CACHE STRING  "Include VHLD backend" FORCE )
+        set ( WASM_BACKEND                       OFF      CACHE STRING  "Include WASM backend" FORCE )
+        EOF
     
     - uses: ilammy/msvc-dev-cmd@v1
 
@@ -202,6 +252,32 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
+        repository: grame-cncm/faust
+        ref: master-dev
+
+    - shell: bash
+      run: |
+        cat <<EOF > build/backends/mfx.cmake
+        set ( C_BACKEND      COMPILER STATIC DYNAMIC      CACHE STRING  "Include C backend" FORCE )
+        set ( CODEBOX_BACKEND      COMPILER STATIC DYNAMIC      CACHE STRING  "Include Codebox backend" FORCE )
+        set ( CPP_BACKEND    COMPILER STATIC DYNAMIC      CACHE STRING  "Include CPP backend" FORCE )
+        set ( CMAJOR_BACKEND                     OFF  CACHE STRING  "Include Cmajor backend" FORCE )
+        #set ( CMAJOR_BACKEND                     OFF       CACHE STRING  "Include Cmajor backend" FORCE )
+        set ( CSHARP_BACKEND                     OFF       CACHE STRING  "Include CSharp backend" FORCE )
+        set ( DLANG_BACKEND                      OFF       CACHE STRING  "Include Dlang backend" FORCE )
+        set ( FIR_BACKEND                        OFF      CACHE STRING  "Include FIR backend" FORCE )
+        set ( INTERP_BACKEND                     OFF      CACHE STRING  "Include Interpreter backend" FORCE )
+        set ( JAVA_BACKEND                       OFF       CACHE STRING  "Include JAVA backend" FORCE )
+        set ( JAX_BACKEND                        OFF       CACHE STRING  "Include JAX backend"  FORCE )
+        set ( JULIA_BACKEND                      OFF       CACHE STRING  "Include Julia backend" FORCE )
+        set ( JSFX_BACKEND                      OFF       CACHE STRING  "Include JSFX backend" FORCE )
+        set ( LLVM_BACKEND   COMPILER STATIC DYNAMIC      CACHE STRING  "Include LLVM backend" FORCE )
+        set ( OLDCPP_BACKEND COMPILER STATIC DYNAMIC      CACHE STRING  "Include old CPP backend" FORCE )
+        set ( RUST_BACKEND                       OFF      CACHE STRING  "Include Rust backend" FORCE )
+        set ( TEMPLATE_BACKEND                   OFF      CACHE STRING  "Include Template backend" FORCE )
+        set ( VHDL_BACKEND                       OFF      CACHE STRING  "Include VHLD backend" FORCE )
+        set ( WASM_BACKEND                       OFF      CACHE STRING  "Include WASM backend" FORCE )
+        EOF
 
     - name: Build libmicrohttpd
       run: |
