@@ -33,10 +33,17 @@ set ( WASM_BACKEND                       OFF      CACHE STRING  "Include WASM ba
 EOF
 
 find /usr -name llvm-config
-export PATH="/usr/lib/llvm-19/bin:$PATH"
+export PATH="/usr/lib/llvm-16/bin:$PATH"
 export LLVM_ROOT=$(llvm-config --prefix | tr '\n' ' ')
 echo "LLVM_ROOT: " $LLVM_ROOT
 cd build
 cmake -C ./backends/mfx.cmake -C ./targets/all.cmake . -Bbuild -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=faust -DUSE_LLVM_CONFIG=ON
-# cmake --build build --config Release --parallel 16 --verbose
-# cmake --build build --config Release --target install --verbose
+cmake --build build --config Debug --parallel 16 --verbose
+cmake --build build --config Debug --target install --verbose
+cd faust/share/faust
+wget https://github.com/grame-cncm/faustlibraries/archive/refs/heads/master.zip
+unzip master.zip
+mv faustlibraries-master/* .
+rm -r faustlibraries-master master.zip
+cd ../../..
+tar cJf faust.tar.xz -C faust .
