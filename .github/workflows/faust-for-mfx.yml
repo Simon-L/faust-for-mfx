@@ -19,17 +19,20 @@ on:
       do-build-windows:
         type: boolean
         default: false
+        description: 'do-build-windows'
       do-build-macos:
         type: boolean
         default: true
+        description: 'do-build-macos'
       do-build-ubuntu:
         type: boolean
         default: false
+        description: 'do-build-ubuntu'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   build-ubuntu:
-    if: ${{ inputs.do-build-ubuntu || true }}
+    if: ${{ inputs.do-build-ubuntu || false }}
     strategy:
       fail-fast: false
       matrix:
@@ -103,7 +106,7 @@ jobs:
         path: build/faust/
         
   build-windows:
-    if: ${{ inputs.do-build-windows || true }}
+    if: ${{ inputs.do-build-windows || false }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
