@@ -410,7 +410,7 @@ jobs:
         cd build
 
         cmake -C backends/mfx.cmake -C targets/all.cmake \
-          ${CMAKEOPT} -DCMAKE_INSTALL_PREFIX=pfx \
+          ${CMAKEOPT} -DCMAKE_INSTALL_PREFIX=pfx -DUSE_LLVM_CONFIG=${USE_LLVM_CONFIG} \
           -Bfaustdir .
         cmake --build faustdir --parallel 4 --verbose --target install
       env:
