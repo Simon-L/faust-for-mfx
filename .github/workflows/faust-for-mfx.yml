@@ -411,8 +411,8 @@ jobs:
         export USE_LLVM_CONFIG=off
     
         cd build
-        make BACKENDS=mfx.cmake DESTDIR=$PWD/pfx BUILDOPT="--config Release --parallel 4" all
-        make BACKENDS=mfx.cmake DESTDIR=$PWD/pfx BUILDOPT="--config Release --parallel 4" install
+        make BACKENDS=mfx.cmake TARGETS=all.cmake DESTDIR=$PWD/pfx BUILDOPT="--config Release --parallel 4" all
+        make BACKENDS=mfx.cmake TARGETS=all.cmake DESTDIR=$PWD/pfx BUILDOPT="--config Release --parallel 4" install
       env:
         CMAKE_OSX_ARCHITECTURES: ${{matrix.CMAKE_OSX_ARCHITECTURES}}
         ARCHS: ${{matrix.ARCHS}}
@@ -426,7 +426,7 @@ jobs:
     - name: Upload Faust artifact
       uses: actions/upload-artifact@v4
       with:
-        name: faust-macos-${{ steps.sha.outputs.sha_short }}
+        name: faust-macos-${{ matrix.os }}-${{ steps.sha.outputs.sha_short }}
         path: build/pfx/
         # if-no-files-found: error
 
@@ -447,7 +447,8 @@ jobs:
       - name: Check
         shell: bash
         run: |
-          tar -C faust-macos* -czf faust-for-mfx-macos.tar.gz .
+          tar -C faust-macos-arm64-* -czf faust-for-mfx-macos-arm64.tar.gz .
+          tar -C faust-macos-x64-* -czf faust-for-mfx-macos-x64.tar.gz .
           tar -C faust-ubuntu* -czf faust-for-mfx-ubuntu.tar.gz .
           tar -C faust-windows* -czf faust-for-mfx-windows.tar.gz .
       - name: Upload release assets
