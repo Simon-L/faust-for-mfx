@@ -411,8 +411,8 @@ jobs:
         export USE_LLVM_CONFIG=off
     
         cd build
-        make BACKENDS=mfx.cmake TARGETS=all.cmake DESTDIR=$PWD/pfx BUILDOPT="--config Release --parallel 4" all
-        make BACKENDS=mfx.cmake TARGETS=all.cmake DESTDIR=$PWD/pfx BUILDOPT="--config Release --parallel 4" install
+        make BACKENDS=mfx.cmake TARGETS=all.cmake DESTDIR=$PWD/pfx PREFIX= BUILDOPT="--config Release --parallel 4" all
+        make BACKENDS=mfx.cmake TARGETS=all.cmake DESTDIR=$PWD/pfx PREFIX= BUILDOPT="--config Release --parallel 4" install
       env:
         CMAKE_OSX_ARCHITECTURES: ${{matrix.CMAKE_OSX_ARCHITECTURES}}
         ARCHS: ${{matrix.ARCHS}}
