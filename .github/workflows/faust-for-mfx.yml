@@ -403,12 +403,7 @@ jobs:
         export LLVM_LD_FLAGS="-L$LLVM_LIB_DIR -Wl,-search_paths_first -Wl,-headerpad_max_install_names"
         export LLVM="$LLVM_LD_FLAGS $LLVM_LIBS"
 
-        export FAUSTLIVE=$PWD/faustlive
-        export BUILD_HTTP_STATIC=ON
-        export USE_STATIC_SNDFILE=1
         export CMAKEOPT="-DCMAKE_OSX_ARCHITECTURES="$CMAKE_OSX_ARCHITECTURES" -DCMAKE_OSX_DEPLOYMENT_TARGET=$CMAKE_OSX_DEPLOYMENT_TARGET -DCMAKE_BUILD_TYPE=Release"
-        export INCLUDE_LLVM=ON
-        export USE_LLVM_CONFIG=off
 
         cd build
 
@@ -420,15 +415,11 @@ jobs:
         set(LLVM_DEFINITIONS $ENV{LLVM_DEFINITIONS} CACHE STRING "")
         set(LLVM_LD_FLAGS $ENV{LLVM_LD_FLAGS} CACHE STRING "")
         set(LLVM $ENV{LLVM} CACHE STRING "")
-        set(BUILD_HTTP_STATIC $ENV{BUILD_HTTP_STATIC} CACHE BOOL "")
-        set(USE_STATIC_SNDFILE $ENV{USE_STATIC_SNDFILE} CACHE BOOL "")
         set(CMAKEOPT $ENV{CMAKEOPT} CACHE STRING "")
-        set(INCLUDE_LLVM $ENV{INCLUDE_LLVM} CACHE BOOL "")
-        set(USE_LLVM_CONFIG $ENV{USE_LLVM_CONFIG} CACHE BOOL "")
         EOF
 
         cmake -C backends/mfx.cmake -C targets/all.cmake -C env.txt \
-          ${CMAKEOPT} -DCMAKE_INSTALL_PREFIX=pfx \
+          ${CMAKEOPT} -DCMAKE_INSTALL_PREFIX=pfx -DBUILD_HTTP_STATIC=ON -DUSE_STATIC_SNDFILE=ON -DINCLUDE_LLVM=ON -DUSE_LLVM_CONFIG=OFF \
           -Bfaustdir .
         cmake --build faustdir --parallel 4 --verbose --target install
       env:
