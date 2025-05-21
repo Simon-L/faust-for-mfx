@@ -42,6 +42,11 @@ jobs:
             cmake-options: >-
               -DCMAKE_BUILD_TYPE=Release
               -DCMAKE_VERBOSE_MAKEFILE=ON
+          - name: ubuntu-arm64
+            os: ubuntu-22.04-arm
+            cmake-options: >-
+              -DCMAKE_BUILD_TYPE=Release
+              -DCMAKE_VERBOSE_MAKEFILE=ON
 
     runs-on: ${{ matrix.os }}
 
@@ -102,7 +107,7 @@ jobs:
     - name: Upload Faust artifact
       uses: actions/upload-artifact@v4
       with:
-        name: faust-ubuntu-${{ steps.sha.outputs.sha_short }}
+        name: faust-${{ matrix.name }}-${{ steps.sha.outputs.sha_short }}
         path: build/faust/
         
   build-windows:
@@ -449,7 +454,8 @@ jobs:
         run: |
           tar -C faust-macos-arm64-* -czf faust-for-mfx-macos-arm64.tar.gz .
           tar -C faust-macos-x64-* -czf faust-for-mfx-macos-x64.tar.gz .
-          tar -C faust-ubuntu* -czf faust-for-mfx-ubuntu.tar.gz .
+          tar -C faust-ubuntu-x86_64-* -czf faust-for-mfx-ubuntu-x86_64.tar.gz .
+          tar -C faust-ubuntu-arm64-* -czf faust-for-mfx-ubuntu-arm64.tar.gz .
           tar -C faust-windows* -czf faust-for-mfx-windows.tar.gz .
       - name: Upload release assets
         uses: svenstaro/upload-release-action@v2
